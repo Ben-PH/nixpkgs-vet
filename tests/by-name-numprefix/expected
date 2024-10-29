@@ -1,4 +1,2 @@
-trace: This should be on stderr!
-@REDACTED@error: This is an error!@REDACTED@
 - pkgs/by-name/_1/10foo: Attribute `10foo` should not be number-prefixed. It is suggestet to `"`-wrap this name
 This PR introduces the problems listed above. Please fix them before merging, otherwise the base branch would break.
