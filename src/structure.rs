@@ -7,7 +7,9 @@ use lazy_static::lazy_static;
 use regex::Regex;
 use relative_path::RelativePathBuf;
 
-use crate::problem::{npv_109, npv_110, npv_111, npv_140, npv_141, npv_142, npv_143, npv_144};
+use crate::problem::{
+    npv_109, npv_110, npv_111, npv_140, npv_141, npv_142, npv_143, npv_144, npv_170,
+};
 use crate::references;
 use crate::validation::{self, ResultIteratorExt, Validation::Success};
 use crate::NixFileStore;
@@ -138,11 +140,18 @@ fn check_package(
     } else {
         let package_name_valid = PACKAGE_NAME_REGEX.is_match(&package_name);
         let result = if !package_name_valid {
-            npv_141::InvalidPackageDirectoryName::new(
-                package_name.clone(),
-                relative_package_dir.clone(),
-            )
-            .into()
+            if package_name
+                .chars()
+                .next()
+                .is_some_and(|c| c.is_ascii_digit())
+            {
+                npv_170::ByNamePackegPrefixedWithNumber::new(package_name.clone()).into()
+            } else {
+                npv_141::InvalidPackageDirectoryName::new(
+                    package_name.clone(),
+                    relative_package_dir.clone(),
+                ).into()
+            }
         } else {
             Success(())
         };
