@@ -16,8 +16,8 @@ pub const BASE_SUBPATH: &str = "pkgs/by-name";
 pub const PACKAGE_NIX_FILENAME: &str = "package.nix";
 
 lazy_static! {
-    static ref SHARD_NAME_REGEX: Regex = Regex::new(r"^[a-z0-9_-]{1,2}$").unwrap();
-    static ref PACKAGE_NAME_REGEX: Regex = Regex::new(r"^[a-zA-Z0-9_-]+$").unwrap();
+    static ref SHARD_NAME_REGEX: Regex = Regex::new(r"^((_[0-9])|([a-z][a-z0-9_-]?))$").unwrap();
+    static ref PACKAGE_NAME_REGEX: Regex = Regex::new(r"^((_[0-9])|[a-zA-Z])[a-zA-Z0-9_-]*$").unwrap();
 }
 
 /// Deterministic file listing so that tests are reproducible.
