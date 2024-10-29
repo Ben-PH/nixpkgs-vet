@@ -145,12 +145,17 @@ fn check_package(
                 .next()
                 .is_some_and(|c| c.is_ascii_digit())
             {
-                npv_170::ByNamePackegPrefixedWithNumber::new(package_name.clone()).into()
+                npv_170::ByNamePackegPrefixedWithNumber::new(
+                    package_name.clone(),
+                    relative_package_dir.clone(),
+                )
+                .into()
             } else {
                 npv_141::InvalidPackageDirectoryName::new(
                     package_name.clone(),
                     relative_package_dir.clone(),
-                ).into()
+                )
+                .into()
             }
         } else {
             Success(())
