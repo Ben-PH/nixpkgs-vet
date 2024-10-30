@@ -140,11 +140,7 @@ fn check_package(
     } else {
         let package_name_valid = PACKAGE_NAME_REGEX.is_match(&package_name);
         let result = if !package_name_valid {
-            if package_name
-                .chars()
-                .next()
-                .is_some_and(|c| c.is_ascii_digit())
-            {
+            if package_name.starts_with(|c: char| c.is_ascii_digit()) {
                 npv_170::ByNamePackegPrefixedWithNumber::new(
                     package_name.clone(),
                     relative_package_dir.clone(),

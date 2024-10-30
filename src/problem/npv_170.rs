@@ -19,7 +19,7 @@ impl fmt::Display for ByNamePackegPrefixedWithNumber {
         } = self;
         write!(
             f,
-            r#"- {relative_package_dir}: Attribute `{package_name}` should not be number-prefixed. It is suggestet to `"`-wrap this name"#
+            "- {relative_package_dir}: Attribute `{package_name}` should not be number-prefixed. Prefix with `_`, or wrap in quotes"
         )
     }
 }
